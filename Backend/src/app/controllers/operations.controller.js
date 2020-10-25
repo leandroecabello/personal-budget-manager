@@ -3,6 +3,7 @@ const OperationsService = require("../services/operation.service");
 
 class OperationsController {
   static async getAll(req, res) {
+    //console.log(req.user.userId);
     try {
       const operations = await OperationsService.getAllDb();
       res.status(200).json(operations);

@@ -2,6 +2,7 @@ const Sequelize = require("sequelize");
 const config = require("./config/config");
 
 const OperationModel = require("./app/models/Operation");
+const UserModel = require("./app/models/Users");
 
 const dbQueryString = `mysql://${config.DDBB.USER}:${config.DDBB.PASS}@${config.DDBB.HOST}:${config.DDBB.PORT}/${config.DDBB.NAME}`;
 const sequelize = new Sequelize(dbQueryString);
@@ -24,6 +25,7 @@ db.dbSyncTables = async () => {
 
 db.tables = {
   Operation: OperationModel(sequelize, Sequelize),
+  User: UserModel(sequelize, Sequelize),
 };
 
 module.exports = db;
