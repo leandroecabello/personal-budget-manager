@@ -1,12 +1,14 @@
 const OperationsService = require("../services/operation.service");
-//const moment = require("moment");
 
 class OperationsController {
   static async getAll(req, res) {
+    //console.log(req.user.userId);
     try {
       const operations = await OperationsService.getAllDb();
+      console.log(operations);
       res.status(200).json(operations);
     } catch (err) {
+      console.log(err);
       res.status(500).json({
         error: "Something went wrong. Please retry or contact with an admin.",
         message: err,
@@ -15,17 +17,38 @@ class OperationsController {
   }
 
   static async add(req, res) {
-    const { concept, amount, opType } = req.body;
+    const { userId } = req.user;
+    const { concept, amount, opType, date, category } = req.body;
     try {
       const operation = await OperationsService.store({
         concept,
         amount,
+        date,
         opType,
+        category,
+        userId,
       });
       res
         .status(201)
         .json({ message: "Operation created successfully", operation });
     } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: "Something went wrong. Please retry or contact with an admin.",
+        message: err,
+      });
+    }
+  }
+
+  static async getById(req, res) {
+    const { id } = req.params;
+    //console.log(req.user.userId);
+    try {
+      const operation = await OperationsService.getOneById(id);
+      console.log(operation);
+      res.status(200).json(operation);
+    } catch (err) {
+      console.log(err);
       res.status(500).json({
         error: "Something went wrong. Please retry or contact with an admin.",
         message: err,
@@ -35,10 +58,10 @@ class OperationsController {
 
   static async update(req, res) {
     const { id } = req.params;
-    const { concept, amount, date = new Date() } = req.body;
+    const { concept, amount, date, category } = req.body;
     try {
       const operation = await OperationsService.setUpdate(
-        { concept, amount, date },
+        { concept, amount, date, category },
         id
       );
       res
@@ -59,6 +82,41 @@ class OperationsController {
       res
         .status(200)
         .json({ message: `Operation with id: ${id} was deleted successfully` });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: "Something went wrong. Please retry or contact with an admin.",
+        message: err,
+      });
+    }
+  }
+
+  static async getByOpType(req, res) {
+    const { userId } = req.user;
+    const { opType } = req.body;
+    try {
+      const operations = await OperationsService.getAllByOpType(userId, opType);
+      console.log(operations);
+      res.status(200).json(operations);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: "Something went wrong. Please retry or contact with an admin.",
+        message: err,
+      });
+    }
+  }
+
+  static async getByCategory(req, res) {
+    const { userId } = req.user;
+    const { category } = req.body;
+    try {
+      const operations = await OperationsService.getAllByCategory(
+        userId,
+        category
+      );
+      console.log(operations);
+      res.status(200).json(operations);
     } catch (err) {
       console.log(err);
       res.status(500).json({

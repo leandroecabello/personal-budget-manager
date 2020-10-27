@@ -1,5 +1,5 @@
 const app = require("./app/app");
-const db = require("./database");
+const { db } = require("./database");
 
 (async function main() {
   try {
