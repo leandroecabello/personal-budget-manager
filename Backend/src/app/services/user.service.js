@@ -1,13 +1,12 @@
-const { tables } = require("../../database");
-const User = tables.User;
+const User = require("../models/Users");
 
 class UsersService {
   static async store(user) {
     return await User.create(user);
   }
 
-  static async getOneByEmail(user_email) {
-    return await User.findOne({ where: { email: user_email } });
+  static async getOneByEmail(email) {
+    return await User.findOne({ where: { email } });
   }
 }
 
