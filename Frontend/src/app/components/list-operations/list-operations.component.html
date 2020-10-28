@@ -1,1 +1,5 @@
-<p>list-operations works!</p>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let op of operations">
+    {{ op.id }} - {{op.concept}}
+  </li>
+</ul>

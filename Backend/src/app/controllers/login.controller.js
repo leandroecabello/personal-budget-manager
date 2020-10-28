@@ -10,7 +10,7 @@ class LoginController {
       if (user) {
         const compare = bcrypt.compareSync(password, user.password);
         if (compare) {
-          res.status(200).json({ succes: generateToken(user) });
+          res.status(200).json({ token: generateToken(user) });
         } else {
           res.status(400).json({ message: " user or password error " });
         }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { OperationsService } from 'src/app/services/operations/operations.service';
 
 @Component({
   selector: 'app-list-operations',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListOperationsComponent implements OnInit {
 
-  constructor() { }
+  public operations: [];
+
+  constructor(private operationsService: OperationsService) { }
 
   ngOnInit() {
+    this.operationsService.getOperations()
+    .subscribe(
+      res => {
+        console.log(res);
+        this.operations = res;
+      },
+      err => console.log(err)
+    );
   }
 
 }
