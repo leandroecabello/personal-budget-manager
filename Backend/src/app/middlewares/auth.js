@@ -17,6 +17,7 @@ const verifyToken = (req, res, next) => {
     if (checkToken) {
       req.user = checkToken;
       console.log(req.user.userId);
+      console.log(checkToken.expiredAt);
     }
   } catch (err) {
     console.log(err);
