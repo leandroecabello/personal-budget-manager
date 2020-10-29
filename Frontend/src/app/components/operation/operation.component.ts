@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OperationsService } from 'src/app/services/operations/operations.service';
 
 @Component({
@@ -8,19 +9,24 @@ import { OperationsService } from 'src/app/services/operations/operations.servic
 })
 export class OperationComponent implements OnInit {
 
-  public operations = [];
+  public operation = {};
 
-  constructor( private operationsService: OperationsService) { }
+  constructor(
+    private operationsService: OperationsService,
+    private router: Router
+    ) { }
 
   ngOnInit() {
-    /* this.operationsService.getOperations()
+  }
+
+  addOperation() {
+    this.operationsService.addOperation(this.operation)
       .subscribe(
         res => {
           console.log(res);
-          // this.operations = res.
+          this.router.navigate(['/operations']);
         },
         err => console.log(err)
-      ); */
+      );
   }
-
 }

@@ -13,6 +13,8 @@ import { ErrorComponent } from './components/error/error.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { AuthGuard } from './auth.guard';
 import { SaveTokenService } from './services/token/save-token.service';
+import { EditOperationFormComponent } from './components/edit-operation-form/edit-operation-form.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { SaveTokenService } from './services/token/save-token.service';
     OperationComponent,
     ListOperationsComponent,
     ErrorComponent,
-    NavigationComponent
+    NavigationComponent,
+    EditOperationFormComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

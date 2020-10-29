@@ -1,5 +1,34 @@
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let op of operations">
-    {{ op.id }} - {{op.concept}}
-  </li>
-</ul>
+<!-- <app-search></app-search> -->
+<div class="table-responsive">
+  <table class="table table-hover table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Concept</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+        <th scope="col">OpType</th>
+        <th scope="col">Category</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let op of operations">
+        <th scope="row">{{ op.id }}</th>
+        <td>{{op.concept}}</td>
+        <td>$ {{op.amount}}</td>
+        <td>{{op.date}}</td>
+        <td>{{op.opType}}</td>
+        <td>{{op.category}}</td>
+        <div class="p-1">
+          <button class="btn btn-primary m-1" (click)="operationSelected(op.id)">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button class="btn btn-danger m-1" (click)="deleteOperation(op.id)">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </tr>
+    </tbody>
+  </table>
+</div>
