@@ -91,6 +91,21 @@ class OperationsController {
     }
   }
 
+  static async getAllByUser(req, res) {
+    const { userId } = req.user;
+    try {
+      const operations = await OperationsService.getAllByUserId(userId);
+      console.log(operations);
+      res.status(200).json(operations);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: "Something went wrong. Please retry or contact with an admin.",
+        message: err,
+      });
+    }
+  }
+
   static async getByOpType(req, res) {
     const { userId } = req.user;
     const { opType } = req.body;

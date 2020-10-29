@@ -8,6 +8,7 @@ router
   .post("/addOperation", verifyToken, OperationsController.add)
 
   .get("/:id", verifyToken, OperationsController.getById)
+  .get("/opByUser/:userId", verifyToken, OperationsController.getAllByUser)
   .get("/search/opType", verifyToken, OperationsController.getByOpType)
   .get("/search/category", verifyToken, OperationsController.getByCategory)
 

@@ -22,6 +22,15 @@ class OperationsService {
     return await Operation.destroy({ where: { id } });
   }
 
+  static async getAllByUserId(userId) {
+    return await Operation.findAll({
+      where: {
+        userId,
+      },
+      order: [["opType", "DESC"]],
+    });
+  }
+
   static async getAllByOpType(userId, opType) {
     return await Operation.findAll({
       where: {
