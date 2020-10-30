@@ -10,10 +10,9 @@ import { OperationsService } from 'src/app/services/operations/operations.servic
 export class EditOperationFormComponent implements OnInit {
 
   private id: number;
-  private operation = {};
 
   constructor(
-    private operationsService: OperationsService,
+    public operationsService: OperationsService,
     private activeRoute: ActivatedRoute,
     private router: Router
   ) { }
@@ -24,15 +23,16 @@ export class EditOperationFormComponent implements OnInit {
       this.operationsService.getOneOpById(this.id)
         .subscribe(
           res => {
-            this.operation = res;
+            console.log(res);
+            this.operationsService.selectedOperation = res;
           },
           err => console.log(err)
         );
     });
   }
 
-  updateOperation() {
-    this.operationsService.updateOperation(this.id, this.operation)
+  updateOperation(form) {
+    this.operationsService.updateOperation(this.id, form.value)
       .subscribe(
         res => {
           console.log(res);

@@ -5,21 +5,22 @@
         Edit Operation
       </div>
       <div class="card-body">
-        <form (submit)="updateOperation()">
+        <form #editOpForm="ngForm" (ngSubmit)="updateOperation(editOpForm)">
           <div class="form-group">
-            <input type="text" [(ngModel)]="operation.concept" name="concept" class="form-control" placeholder="Concept"
-              autofocus>
+            <input type="text" [(ngModel)]="operationsService.selectedOperation.concept" name="concept"
+              class="form-control" placeholder="Concept" autofocus>
           </div>
           <div class="form-group">
-            <input type="number" [(ngModel)]="operation.amount" name="amount" class="form-control" placeholder="Amount">
+            <input type="number" [(ngModel)]="operationsService.selectedOperation.amount" name="amount"
+              class="form-control" placeholder="Amount">
           </div>
           <div class="form-group">
-            <input type="datetime" [(ngModel)]="operation.date" name="date" class="form-control"
-              placeholder="Date format YYYY/MM/DD">
+            <input type="datetime" [(ngModel)]="operationsService.selectedOperation.date" name="date"
+              class="form-control" placeholder="Date format YYYY/MM/DD">
           </div>
           <div class="form-group">
-            <input type="text" [(ngModel)]="operation.category" name="category" class="form-control"
-              placeholder="Category">
+            <input type="text" [(ngModel)]="operationsService.selectedOperation.category" name="category"
+              class="form-control" placeholder="Category">
           </div>
           <button type="submit" class="btn btn-info btn-block">
             Update

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GLOBAL } from '../Global';
+import { Operation } from 'src/app/models/Operation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,15 @@ export class OperationsService {
 
   private url: string;
   private userId: number;
+  public selectedOperation: Operation = {
+    concept: '',
+    amount: 0,
+    date: '',
+    opType: '',
+    category: '',
+    userId: 0
+  };
+  public operations: Operation[];
 
   constructor(
     private http: HttpClient,
@@ -17,24 +27,22 @@ export class OperationsService {
   }
 
   getOperations() {
-    return this.http.get<any>(`${this.url}/operations/opByUser/${this.userId}`);
+    return this.http.get<Operation[]>(`${this.url}/operations/opByUser/${this.userId}`);
   }
 
-  addOperation(operation) {
-    return this.http.post<any>(`${this.url}/operations/addOperation`, operation);
+  addOperation(operation: Operation) {
+    return this.http.post(`${this.url}/operations/addOperation`, operation);
   }
 
   getOneOpById(id: number) {
-    return this.http.get<any>(`${this.url}/operations/${id}`);
+    return this.http.get<Operation>(`${this.url}/operations/${id}`);
   }
 
-  updateOperation(id, operation) {
+  updateOperation(id: number, operation: Operation) {
       return this.http.put(`${this.url}/operations/editOperation/${id}`, operation);
   }
 
   deleteOperation(id: number) {
     return this.http.delete(`${this.url}/operations/deleteOperation/${id}`);
   }
-
-
 }

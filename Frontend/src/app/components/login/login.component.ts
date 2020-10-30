@@ -9,18 +9,18 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  private user = {};
-
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+    ) {
+    }
 
   ngOnInit() { }
 
-  signin() {
-    this.authService.login(this.user)
+  signin(form) {
+    this.authService.login(form.value)
       .subscribe(
         res => {
-          console.log(res);
-          localStorage.setItem('token', res.token);
           this.router.navigate(['/operations']);
         },
         err => console.log(err)

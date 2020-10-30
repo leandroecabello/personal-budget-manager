@@ -9,10 +9,8 @@ import { OperationsService } from 'src/app/services/operations/operations.servic
 })
 export class ListOperationsComponent implements OnInit {
 
-  public operations: [];
-
   constructor(
-    private operationsService: OperationsService,
+    public operationsService: OperationsService,
     private router: Router
     ) { }
 
@@ -24,7 +22,7 @@ export class ListOperationsComponent implements OnInit {
     this.operationsService.getOperations()
     .subscribe(
       res => {
-        this.operations = res;
+        this.operationsService.operations = res;
       },
       err => console.log(err)
     );

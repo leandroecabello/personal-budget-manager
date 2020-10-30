@@ -9,18 +9,16 @@ import { OperationsService } from 'src/app/services/operations/operations.servic
 })
 export class OperationComponent implements OnInit {
 
-  public operation = {};
-
   constructor(
-    private operationsService: OperationsService,
+    public operationsService: OperationsService,
     private router: Router
     ) { }
 
   ngOnInit() {
   }
 
-  addOperation() {
-    this.operationsService.addOperation(this.operation)
+  addOperation(form) {
+    this.operationsService.addOperation(form.value)
       .subscribe(
         res => {
           console.log(res);

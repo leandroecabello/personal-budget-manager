@@ -13,18 +13,18 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let op of operations">
-        <th scope="row">{{ op.id }}</th>
-        <td>{{op.concept}}</td>
-        <td>$ {{op.amount}}</td>
-        <td>{{op.date}}</td>
-        <td>{{op.opType}}</td>
-        <td>{{op.category}}</td>
+      <tr *ngFor="let operation of operationsService.operations">
+        <th scope="row">{{ operation.id }}</th>
+        <td>{{operation.concept}}</td>
+        <td>$ {{operation.amount}}</td>
+        <td>{{operation.date}}</td>
+        <td>{{operation.opType}}</td>
+        <td>{{operation.category}}</td>
         <div class="p-1">
-          <button class="btn btn-primary m-1" (click)="operationSelected(op.id)">
+          <button class="btn btn-primary m-1" (click)="operationSelected(operation.id)">
             <i class="fa fa-edit"></i>
           </button>
-          <button class="btn btn-danger m-1" (click)="deleteOperation(op.id)">
+          <button class="btn btn-danger m-1" (click)="deleteOperation(operation.id)">
             <i class="fa fa-trash"></i>
           </button>
         </div>
