@@ -16,12 +16,14 @@ export class ListOperationsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getOperations();
+    this.getbalance();
   }
 
   getOperations() {
     this.operationsService.getOperations()
     .subscribe(
       res => {
+        console.log(res);
         this.operationsService.operations = res;
       },
       err => console.log(err)
@@ -41,5 +43,16 @@ export class ListOperationsComponent implements OnInit {
 
   operationSelected(id: number) {
     this.router.navigate(['/operations/editOperation', id]);
+  }
+
+  getbalance() {
+    this.operationsService.getBalance()
+      .subscribe(
+        res => {
+          console.log(res);
+          this.operationsService.balance = res;
+        },
+        err => console.log(err)
+      );
   }
 }

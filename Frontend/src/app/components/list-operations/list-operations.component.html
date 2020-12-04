@@ -1,4 +1,19 @@
 <!-- <app-search></app-search> -->
+<div class="container">
+  <div class="bg-primary p-3 mb-4 d-flex d-flex justify-content-between">
+    <h3>Total Income: </h3>
+    <h3>${{operationsService.balance.totalIncome}}</h3>
+  </div>
+  <div class="bg-danger p-3 mb-4 d-flex d-flex justify-content-between align-items-end">
+    <h3>Total Discharge: </h3>
+    <h3>${{operationsService.balance.totalDischarge}}</h3>
+  </div>
+  <div class="bg-dark p-3 mb-4 d-flex d-flex justify-content-between">
+    <h3 class="text-light">Balance: </h3>
+    <h3 class="text-light">${{operationsService.balance.balance}}</h3>
+  </div>
+</div>
+
 <div class="table-responsive">
   <table class="table table-hover table-striped">
     <thead class="thead-dark">

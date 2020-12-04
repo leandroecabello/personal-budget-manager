@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GLOBAL } from '../Global';
-import { Operation } from 'src/app/models/Operation.model';
+import { Operation, Balance } from 'src/app/models/Operation.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +19,12 @@ export class OperationsService {
     userId: 0
   };
   public operations: Operation[];
+
+  public balance: Balance = {
+    totalIncome: 0,
+    totalDischarge: 0,
+    balance: 0,
+  };
 
   constructor(
     private http: HttpClient,
@@ -45,4 +51,9 @@ export class OperationsService {
   deleteOperation(id: number) {
     return this.http.delete(`${this.url}/operations/deleteOperation/${id}`);
   }
+
+  getBalance() {
+    return this.http.get<Balance>(`${this.url}/operations/balance/${this.userId}`);
+  }
+
 }

@@ -9,3 +9,10 @@ export interface Operation {
     category: string;
     userId: number;
 }
+
+export interface Balance {
+    totalIncome: number;
+    totalDischarge: number;
+    balance: number;
+}
+

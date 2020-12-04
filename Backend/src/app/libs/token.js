@@ -6,7 +6,7 @@ const generateToken = (user) => {
   const payload = {
     userId: user.id,
     createdAt: moment().unix(),
-    expiredAt: moment().add(JWT.EXPIRES_TIME, "minutes").unix(),
+    expiredIn: moment().add(JWT.EXPIRES_TIME, "minutes").unix(),
   };
   return sign(JSON.stringify(payload), JWT.PRIVATE_KEY);
 };

@@ -109,10 +109,24 @@ class OperationsController {
   static async getByOpType(req, res) {
     const { userId } = req.user;
     const { opType } = req.body;
+
+    let totalIncome = 0;
+    let totalDischarge = 0;
     try {
       const operations = await OperationsService.getAllByOpType(userId, opType);
-      console.log(operations);
-      res.status(200).json(operations);
+
+      for (let op of operations) {
+        console.log(op.opType);
+        if (op.opType === "ingreso") {
+          totalIncome += op.amount;
+        } else {
+          totalDischarge += op.amount;
+        }
+      }
+
+      const balance = totalIncome - totalDischarge;
+
+      res.status(200).json({ totalIncome, totalDischarge, balance });
     } catch (err) {
       console.log(err);
       res.status(500).json({
@@ -132,6 +146,35 @@ class OperationsController {
       );
       console.log(operations);
       res.status(200).json(operations);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        error: "Something went wrong. Please retry or contact with an admin.",
+        message: err,
+      });
+    }
+  }
+
+  static async getBalance(req, res) {
+    const { userId } = req.user;
+
+    let totalIncome = 0;
+    let totalDischarge = 0;
+    try {
+      const operations = await OperationsService.getAllByUserId(userId);
+
+      for (let op of operations) {
+        console.log(op.opType);
+        if (op.opType === "ingreso") {
+          totalIncome += op.amount;
+        } else {
+          totalDischarge += op.amount;
+        }
+      }
+
+      const balance = totalIncome - totalDischarge;
+
+      res.status(200).json({ totalIncome, totalDischarge, balance });
     } catch (err) {
       console.log(err);
       res.status(500).json({

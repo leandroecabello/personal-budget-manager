@@ -11,6 +11,7 @@ router
   .get("/opByUser/:userId", verifyToken, OperationsController.getAllByUser)
   .get("/search/opType", verifyToken, OperationsController.getByOpType)
   .get("/search/category", verifyToken, OperationsController.getByCategory)
+  .get("/balance/:userId", verifyToken, OperationsController.getBalance)
 
   .put("/editOperation/:id", verifyToken, OperationsController.update)
   .delete("/deleteOperation/:id", verifyToken, OperationsController.deleteById);
