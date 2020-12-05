@@ -2,7 +2,6 @@ const OperationsService = require("../services/operation.service");
 
 class OperationsController {
   static async getAll(req, res) {
-    //console.log(req.user.userId);
     try {
       const operations = await OperationsService.getAllDb();
       console.log(operations);
@@ -18,7 +17,9 @@ class OperationsController {
 
   static async add(req, res) {
     const { userId } = req.user;
+
     const { concept, amount, opType, date, category } = req.body;
+
     try {
       const operation = await OperationsService.store({
         concept,
@@ -42,7 +43,6 @@ class OperationsController {
 
   static async getById(req, res) {
     const { id } = req.params;
-    //console.log(req.user.userId);
     try {
       const operation = await OperationsService.getOneById(id);
       console.log(operation);
@@ -109,24 +109,9 @@ class OperationsController {
   static async getByOpType(req, res) {
     const { userId } = req.user;
     const { opType } = req.body;
-
-    let totalIncome = 0;
-    let totalDischarge = 0;
     try {
       const operations = await OperationsService.getAllByOpType(userId, opType);
-
-      for (let op of operations) {
-        console.log(op.opType);
-        if (op.opType === "ingreso") {
-          totalIncome += op.amount;
-        } else {
-          totalDischarge += op.amount;
-        }
-      }
-
-      const balance = totalIncome - totalDischarge;
-
-      res.status(200).json({ totalIncome, totalDischarge, balance });
+      res.status(200).json(operations);
     } catch (err) {
       console.log(err);
       res.status(500).json({

@@ -27,7 +27,8 @@ class OperationsService {
       where: {
         userId,
       },
-      order: [["opType", "DESC"]],
+      order: [["id", "DESC"]],
+      limit: 10,
     });
   }
 
