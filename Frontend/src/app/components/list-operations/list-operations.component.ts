@@ -36,6 +36,7 @@ export class ListOperationsComponent implements OnInit {
         res => {
           console.log(res);
           this.getOperations();
+          this.getbalance();
         },
         err => console.log(err)
       );
